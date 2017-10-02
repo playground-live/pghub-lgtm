@@ -6,7 +6,7 @@ module PgHub
     LGTM_MARKDOWN_PATTERN = /(!\[LGTM\]\(.+\))\]/
 
     class << self
-      def post_md_image(issue_path)
+      def post_to(issue_path)
         text = markdown_lgtm_from('http://lgtm.in')
 
         if text =~ LGTM_MARKDOWN_PATTERN
