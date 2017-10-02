@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
 
   # TODO : コメントイン
   # sped.add_dependency "pghub-base"
+  spec.add_dependency "mechanize"
 end
