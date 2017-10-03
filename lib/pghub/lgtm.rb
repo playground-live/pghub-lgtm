@@ -21,10 +21,10 @@ module PgHub
           page = agent.get(url).link_with(text: 'Random').click
 
           raise 'Markdown text is not found in http://lgtm.in.' unless page.at('input#dataUrl')
-          data_url = convert_into_img_link(page.at('input#dataUrl')[:value])
-          img_url = redirect_from(data_url)
+          img_url = convert_into_img_link(page.at('input#dataUrl')[:value])
+          redirect_url = redirect_from(img_url)
 
-          break if valid_link?(img_url)
+          break if valid_link?(redirect_url)
 
           raise 'Invalid URL' if i == 4
         end
@@ -37,7 +37,7 @@ module PgHub
       end
 
       def redirect_from(url)
-        Net::HTTP.get_response(URI.parse(url))["location"]
+        Net::HTTP.get_response(URI.parse(url))['location']
       end
 
       def valid_link?(url)
