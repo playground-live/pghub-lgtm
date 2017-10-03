@@ -14,33 +14,33 @@ module PgHub
 
       def md_link_from(url)
         agent = Mechanize.new
+        obtained_url = ''
 
         5.times do |i|
           raise 'Random button is not found in http://lgtm.in.' unless agent.get(url).link_with(text: 'Random')
           page = agent.get(url).link_with(text: 'Random').click
 
           raise 'Markdown text is not found in http://lgtm.in.' unless page.at('input#dataUrl')
-          url = page.at('input#dataUrl').inner_text
+          obtained_url = page.at('input#dataUrl')[:value]
 
-          break if valid_md_link?("http://lgtm.in/i/0KN4MtJRp")
+          break if valid_link?(obtained_url)
 
-          raise 'There are not valid URL' if i == 4
+          raise 'Invalid URL' if i == 4
         end
 
-        "![lgtm](#{url})"
+        "![lgtm](#{convert_into_img_link(obtained_url)})"
       end
 
-      def valid_md_link?(url)
-        connection = Faraday.new(url: url) do |faraday|
-          faraday.request :multipart
-          faraday.request :url_encoded
-          faraday.response :raise_error
-          faraday.adapter :net_http
-        end
-        connection.get
-        return true
+      def convert_into_img_link(link)
+        link.gsub(%r{\/i\/}, '/p/')
+      end
+
+      def valid_link?(url)
+        response = Net::HTTP.get_response(URI.parse(url))
       rescue
         return false
+      else
+        return response.code == '200' ? true : false
       end
     end
   end
