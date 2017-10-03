@@ -4,7 +4,7 @@ require 'mechanize'
 module PgHub
   module Lgtm
     class << self
-      def post_to(issue_path)
+      def post(issue_path)
         comment_client = GithubAPI.new(issue_path)
         comment_client.post(get_md_link)
       end
