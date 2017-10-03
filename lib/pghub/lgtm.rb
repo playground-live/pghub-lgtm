@@ -14,25 +14,30 @@ module PgHub
 
       def md_link_from(url)
         agent = Mechanize.new
-        obtained_url = ''
+        img_url = ''
 
         5.times do |i|
           raise 'Random button is not found in http://lgtm.in.' unless agent.get(url).link_with(text: 'Random')
           page = agent.get(url).link_with(text: 'Random').click
 
           raise 'Markdown text is not found in http://lgtm.in.' unless page.at('input#dataUrl')
-          obtained_url = page.at('input#dataUrl')[:value]
+          data_url = convert_into_img_link(page.at('input#dataUrl')[:value])
+          img_url = redirect_from(data_url)
 
-          break if valid_link?(obtained_url)
+          break if valid_link?(img_url)
 
           raise 'Invalid URL' if i == 4
         end
 
-        "![lgtm](#{convert_into_img_link(obtained_url)})"
+        "![lgtm](#{img_url})"
       end
 
       def convert_into_img_link(link)
         link.gsub(%r{\/i\/}, '/p/')
+      end
+
+      def redirect_from(url)
+        Net::HTTP.get_response(URI.parse(url))["location"]
       end
 
       def valid_link?(url)
