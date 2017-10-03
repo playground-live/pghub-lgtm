@@ -12,7 +12,7 @@ module PgHub
       private
 
       def get_md_link
-        agent = Mechanize.new(redirect_ok: true)
+        agent = Mechanize.new
         img_url = ''
 
         3.times do |i|
