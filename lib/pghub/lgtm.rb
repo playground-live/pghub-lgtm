@@ -1,7 +1,7 @@
 require 'pghub/lgtm/version'
 require 'mechanize'
 
-module PgHub
+module Pghub
   module Lgtm
     class << self
       def post(issue_path)

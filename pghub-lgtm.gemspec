@@ -5,7 +5,7 @@ require "pghub/lgtm/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pghub-lgtm"
-  spec.version       = PgHub::Lgtm::VERSION
+  spec.version       = Pghub::Lgtm::VERSION
   spec.authors       = ["Ebinuma Kenichi"]
   spec.email         = ["ktennis.mqekr12@gmail.com"]
 
