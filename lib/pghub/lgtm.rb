@@ -32,10 +32,9 @@ module PgHub
       def valid_redirect_link?(url)
         redirect_url = get_response(url)['location']
         response = get_response(redirect_url)
-      rescue
-        return false
-      else
         return response.code == '200' ? true : false
+      rescue URI::InvalidURIError
+        return false
       end
 
       def get_response(url)
