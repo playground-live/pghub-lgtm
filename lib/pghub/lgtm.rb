@@ -1,6 +1,9 @@
 require 'pghub/lgtm/version'
 require 'mechanize'
 
+class MarkdownUrlNotFound < StandardError; end
+class ManyInvalidUrls < StandardError; end
+
 module Pghub
   module Lgtm
     class << self
@@ -18,12 +21,12 @@ module Pghub
         3.times do |i|
           page = agent.get('http://lgtm.in/g')
 
-          raise 'Markdown URL is not found in http://lgtm.in/g.' unless page.at('input#dataUrl')
+          raise MarkdownUrlNotFound, 'Markdown URL is not found in http://lgtm.in/g.' unless page.at('input#dataUrl')
           img_url = page.at('input#dataUrl')[:value].gsub(%r{\/i\/}, '/p/')
 
           break if valid_redirect_link?(img_url)
 
-          raise "Many invalid URLs in #{url}" if i == 2
+          raise ManyInvalidUrls, "Many invalid URLs in #{url}" if i == 2
         end
 
         "![lgtm](#{img_url})"
@@ -32,10 +35,9 @@ module Pghub
       def valid_redirect_link?(url)
         redirect_url = get_response(url)['location']
         response = get_response(redirect_url)
-      rescue
-        return false
-      else
         return response.code == '200' ? true : false
+      rescue URI::InvalidURIError
+        return false
       end
 
       def get_response(url)
