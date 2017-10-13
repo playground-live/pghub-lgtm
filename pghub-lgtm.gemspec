@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ktennis.mqekr12@gmail.com"]
 
   spec.summary       = %q{Post LGTM images to your github.}
-  spec.description   = %q{This gem needs pghub-base.}
+  spec.description   = %q{This gem posts random lgtm image when you write "LGTM" to your github conversation}
   spec.homepage      = "https://github.com/ebkn12"
   spec.license       = "MIT"
 
@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
 
   # TODO : コメントイン
   # sped.add_dependency "pghub-base"
+  spec.add_dependency "mechanize"
 end
