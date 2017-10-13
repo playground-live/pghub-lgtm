@@ -5,7 +5,7 @@ require "pghub/lgtm/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pghub-lgtm"
-  spec.version       = PgHub::Lgtm::VERSION
+  spec.version       = Pghub::Lgtm::VERSION
   spec.authors       = ["Ebinuma Kenichi"]
   spec.email         = ["ktennis.mqekr12@gmail.com"]
 
@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 
-  # TODO : コメントイン
+  # TODO : baseを公開したらコメントイン
   # sped.add_dependency "pghub-base"
   spec.add_dependency "mechanize"
 end

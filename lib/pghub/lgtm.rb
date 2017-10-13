@@ -4,7 +4,7 @@ require 'mechanize'
 class MarkdownUrlNotFound < StandardError; end
 class ManyInvalidUrls < StandardError; end
 
-module PgHub
+module Pghub
   module Lgtm
     class << self
       def post(issue_path)
