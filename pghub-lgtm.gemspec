@@ -6,12 +6,12 @@ require "pghub/lgtm/version"
 Gem::Specification.new do |spec|
   spec.name          = "pghub-lgtm"
   spec.version       = Pghub::Lgtm::VERSION
-  spec.authors       = ["Ebinuma Kenichi"]
-  spec.email         = ["ktennis.mqekr12@gmail.com"]
+  spec.authors       = ["ebkn12, akias, Doppon, seteen, mryoshio, sughimura"]
+  spec.email         = ["developers@playground.live"]
 
   spec.summary       = %q{Post LGTM images to your github.}
-  spec.description   = %q{This gem posts random lgtm image when you write "LGTM" to your github conversation}
-  spec.homepage      = "https://github.com/ebkn12"
+  spec.description   = %q{This gem posts random lgtm image when you comment some text including "LGTM" to your github}
+  spec.homepage      = "http://tech-blog.playground.live"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

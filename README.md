@@ -22,7 +22,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+- mount in routes.rb
+
+```ruby
+mount Pghub::Base::Engine => 'some path'
+```
+
+- Get github access token
+- Add following settings to config/initializers/pghub.rb
+
+```ruby
+Pghub.configure do |config|
+  config.github_organization = "Your organization (or user) name"
+  config.github_access_token = "Your Github Access Token"
+end
+```
+
+- Deploy to server
+- Set webhook to your repository
 
 ## Development
 
