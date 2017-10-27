@@ -1,3 +1,4 @@
+require 'pghub/base'
 require 'pghub/lgtm/version'
 require 'mechanize'
 
